@@ -22,10 +22,9 @@ namespace Scrips.Infrastructure.Installers
             builder.RegisterInstance<IHeroUpdatableModel>(heroModel);
             
             builder.RegisterEntryPoint<HeroPresenter>();
-            builder.Register<HeroModel>(Lifetime.Singleton);
             builder.Register<IHeroUseCase, HeroUpdateUseCase>(Lifetime.Singleton);
 
-            builder.RegisterComponent(_heroView);
+            builder.RegisterComponent<IHeroView>(_heroView);
         }
     }
 }

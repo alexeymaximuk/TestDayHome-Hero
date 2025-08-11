@@ -12,9 +12,10 @@ namespace Scrips.Domain.Wallet.Models
         private HeroLevelUpSettings _levelUpSettings;
 
 
-        public HeroWallet(int initialCoins)
+        public HeroWallet(int initialCoins, HeroLevelUpSettings levelUpSettings)
         {
             CurrentCoins = new ReactiveProperty<int>(initialCoins);
+            _levelUpSettings = levelUpSettings;
         }
         
         public UniTask<bool> TrySpendingAmount(int coinsAmount)

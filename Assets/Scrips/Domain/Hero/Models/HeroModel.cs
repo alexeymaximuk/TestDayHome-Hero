@@ -15,7 +15,6 @@ namespace Scrips.Domain.Hero.Models
         int IHeroStatsModel.CurrentLevel() => _currentLevel;
         public ReactiveProperty<ICharacterStat[]> CurrentStats => _characterStats;
         
-        [Inject]
         public HeroModel(HeroStartingStatsSettings startingStatsSettings)
         {
             _currentLevel = 1;
