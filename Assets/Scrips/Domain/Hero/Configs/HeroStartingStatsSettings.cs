@@ -2,13 +2,13 @@ using JetBrains.Annotations;
 using Scrips.Domain.HeroStats.Models;
 using UnityEngine;
 
-namespace Scrips.Domain.Hero.HeroSettings
+namespace Scrips.Domain.Hero.Configs
 {
     [CreateAssetMenu(menuName = "Hero/StartingStats")]
     public class HeroStartingStatsSettings : ScriptableObject
     {
-        [SerializeReference, NotNull] private ICharacterStat[] _characterStats = {};
+        [SerializeField] private CharacterBaseStatSettings[] _characterStatSettings = {};
         
-        public ICharacterStat[] CharacterStats => _characterStats;
+        public CharacterBaseStatSettings[] CharacterStatSettings => _characterStatSettings;
     }
 }

@@ -66,3 +66,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 4187251824958314734}
   _textLabels: {fileID: 11400000, guid: 93994130f15584a8aae13eb6dc429650, type: 2}
+  _statLabelPrefab: {fileID: 9197481963319205126, guid: f8b197ed59526450c890f6af01c3b7bd, type: 3}

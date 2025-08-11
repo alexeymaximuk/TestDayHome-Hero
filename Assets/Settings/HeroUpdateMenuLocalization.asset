@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HeroUpdateMenuLocalization
   m_EditorClassIdentifier: 
   _currentLevelLabel: 'Current level: '
-  _levelUpButtonText: Level up!
+  _levelUpButtonText: 'Level up! Current price: '
   _currentMoneyText: 'Current coins amount: '
   _levelUpPrice: 'Current level: '

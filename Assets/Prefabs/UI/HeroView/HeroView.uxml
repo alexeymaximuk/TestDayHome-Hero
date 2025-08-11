@@ -1,8 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/HeroStatsStyleUI.uss?fileID=7433441132597879392&amp;guid=d738f5978ad7d4f65a88e96e5485a6b0&amp;type=3#HeroStatsStyleUI" />
     <ui:Label text="MoneyCounter&#10;" name="current_coins_amount" class="half_page_label" style="width: 50%;" />
-    <ui:Label text="Hero Stats:" name="HeroHeader" class="header" style="justify-content: flex-start; align-items: auto; align-content: auto; align-self: center; font-size: 28px;" />
-    <ui:Label text="Label" name="current_hero_level" />
-    <ui:GroupBox />
-    <ui:Button text="Button" name="level_up_button" />
+    <ui:Label text="Hero Stats:" name="current_hero_level" class="header" style="justify-content: flex-start; align-items: auto; align-content: auto; align-self: center; font-size: 28px;" />
+    <ui:ListView name="stat_labels_root" selection-type="None" focusable="false" />
+    <ui:Button text="Level up price:" name="level_up_button" />
 </ui:UXML>

@@ -1,38 +1,47 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using R3;
-using Scrips.Domain.Hero.HeroSettings;
+using Scrips.Domain.Hero.Configs;
 using Scrips.Domain.HeroStats.Models;
-using VContainer;
 
 namespace Scrips.Domain.Hero.Models
 {
     public class HeroModel : IHeroStatsModel, IHeroUpdatableModel
     {
-        private readonly ReactiveProperty<ICharacterStat[]> _characterStats;
-
-        private int _currentLevel;
+        public ReactiveProperty<IReadOnlyList<ICharacterStatData>> CurrentStats { get; }
+        private readonly IReadOnlyList<CharacterBaseStat> _characterBaseStats;
         
-        int IHeroStatsModel.CurrentLevel() => _currentLevel;
-        public ReactiveProperty<ICharacterStat[]> CurrentStats => _characterStats;
+        private int _currentLevel;
+        public int CurrentLevel() => _currentLevel;
+        
         
         public HeroModel(HeroStartingStatsSettings startingStatsSettings)
         {
             _currentLevel = 1;
 
-            _characterStats = new ReactiveProperty<ICharacterStat[]>(startingStatsSettings.CharacterStats);
+            var statsList = new List<CharacterBaseStat>();
+            for (int i = 0; i < startingStatsSettings.CharacterStatSettings.Length; i++)
+            {
+                var statSettings = startingStatsSettings.CharacterStatSettings[i];
+                var newStat = new CharacterBaseStat(statSettings);
+                statsList.Add(newStat);
+            }
+            
+            _characterBaseStats = statsList;
+            
+            CurrentStats = new ReactiveProperty<IReadOnlyList<ICharacterStatData>>(_characterBaseStats);
         }
 
         public UniTask UpdateLevel()
         {
             _currentLevel++;
             
-            var currentValue = _characterStats.Value;
-            for (int i = 0; i < currentValue.Length; i++)
+            for (var i = 0; i < _characterBaseStats.Count; i++)
             {
-                currentValue[i].LevelUpStat();
+                _characterBaseStats[i].LevelUpStat();
             }
 
-            _characterStats.Value = currentValue;
+            CurrentStats.OnNext(_characterBaseStats);
             
             return UniTask.CompletedTask;
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scrips.Domain.HeroStats.HeroStatSettings
+namespace Scrips.Domain.HeroStats.Configs
 {
     [CreateAssetMenu(menuName = "HeroStats/StatLevelUpSpeed")]
     public class StatLevelUpSettings : ScriptableObject

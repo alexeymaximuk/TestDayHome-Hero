@@ -12,24 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30f1ca69f9f4069a0d407c4803dd6e6, type: 3}
   m_Name: Default Hero Starting Stats Settings
   m_EditorClassIdentifier: 
-  _characterStats:
-  - rid: 8640003311544041701
-  - rid: 8640003311544041702
-  _levelUpSettings: {fileID: 11400000, guid: 4061087c924054a30b6b7f55de5d9a0f, type: 2}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8640003311544041701
-      type: {class: Health, ns: Scrips.Domain.HeroStats.Models, asm: Assembly-CSharp}
-      data:
-        _startingValue: 200
-        _name: HP
-        _color: {r: 0.4029396, g: 0.5566038, b: 0, a: 1}
-        _levelUpSettings: {fileID: 11400000, guid: 2f35b7225b57e44edb48fac7c5b297d4, type: 2}
-    - rid: 8640003311544041702
-      type: {class: Mana, ns: Scrips.Domain.HeroStats.Models, asm: Assembly-CSharp}
-      data:
-        _startingValue: 100
-        _name: Mana
-        _color: {r: 0.4009434, g: 0.8887895, b: 1, a: 1}
-        _levelUpSettings: {fileID: 11400000, guid: ad062dcd120d94a4eba606167d5a9593, type: 2}
+  _characterStatSettings:
+  - _startingValue: 200
+    _name: HP
+    _color: {r: 0, g: 0.5283019, b: 0.07215219, a: 1}
+    _levelUpSettings: {fileID: 11400000, guid: 2f35b7225b57e44edb48fac7c5b297d4, type: 2}
+  - _startingValue: 100
+    _name: Mana Points
+    _color: {r: 0, g: 0.037703395, b: 0.5377358, a: 1}
+    _levelUpSettings: {fileID: 11400000, guid: ad062dcd120d94a4eba606167d5a9593, type: 2}
+  - _startingValue: 10
+    _name: Damage
+    _color: {r: 0.5372549, g: 0, b: 0.025252482, a: 1}
+    _levelUpSettings: {fileID: 11400000, guid: 41d818779fb9d4f8da048fecb97dcd41, type: 2}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scrips.Domain.Hero.HeroSettings
+namespace Scrips.Domain.Hero.Configs
 {
     [CreateAssetMenu(menuName = "Hero/LevelUpConfig")]
     public class HeroLevelUpSettings : ScriptableObject

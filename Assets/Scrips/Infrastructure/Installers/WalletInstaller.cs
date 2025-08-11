@@ -1,5 +1,5 @@
 using JetBrains.Annotations;
-using Scrips.Domain.Hero.HeroSettings;
+using Scrips.Domain.Hero.Configs;
 using Scrips.Domain.Wallet.Models;
 using UnityEngine;
 using VContainer;
@@ -10,7 +10,7 @@ namespace Scrips.Infrastructure.Installers
     public class WalletInstaller: LifetimeScope
     {
         [SerializeField] private int _initialCoins = 100000;
-        [SerializeField, NotNull] private HeroLevelUpSettings _levelUpSettings;
+        [SerializeField] private HeroLevelUpSettings _levelUpSettings;
 
         protected override void Configure(IContainerBuilder builder)
         {

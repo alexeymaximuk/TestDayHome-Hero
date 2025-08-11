@@ -1,12 +1,13 @@
 using Scrips.Application.UseCases;
-using Scrips.Domain.Hero.HeroSettings;
 using Scrips.Domain.Hero.Models;
 using Scrips.Domain.Hero.Presenters;
-using Scrips.Domain.Hero.UseCases;
 using Scrips.Presentation.Views;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using MessagePipe;
+using Scrips.Domain.Hero.Configs;
+using Scrips.Domain.Hero.MessagesDTO;
 
 namespace Scrips.Infrastructure.Installers
 {
@@ -18,11 +19,15 @@ namespace Scrips.Infrastructure.Installers
         protected override void Configure(IContainerBuilder builder)
         {
             var heroModel = new HeroModel(_heroStartingSettings);
-            builder.RegisterInstance<IHeroStatsModel>(heroModel);
-            builder.RegisterInstance<IHeroUpdatableModel>(heroModel);
+            
+            builder.RegisterInstance<IHeroStatsModel, IHeroUpdatableModel>(heroModel);
+
+            var pipeOptions = builder.RegisterMessagePipe();
+            builder.RegisterMessageBroker<LevelUpButtonClickedDTO>(pipeOptions);
+            
             
             builder.RegisterEntryPoint<HeroPresenter>();
-            builder.Register<IHeroUseCase, HeroUpdateUseCase>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<HeroUpdateUseCase>();
 
             builder.RegisterComponent<IHeroView>(_heroView);
         }

@@ -5,8 +5,8 @@ namespace Scrips.Domain.Wallet.Models
 {
     public interface IWalletModel
     {
-        public ReactiveProperty<int> CurrentCoins { get; }
-        public UniTask<bool> TrySpendingAmount(int coinsAmount);
-        public int CalculateLevelUpPriceForLevel(int level);
+        public ReactiveProperty<long> CurrentCoins { get; }
+        public bool TrySpendingAmount(long coinsAmount);
+        public long CalculateLevelUpPriceForLevel(int level);
     }
 }

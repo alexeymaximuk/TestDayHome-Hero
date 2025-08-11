@@ -1,31 +1,29 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
-using Scrips.Domain.HeroStats.HeroStatSettings;
+using Scrips.Domain.HeroStats.Configs;
 using UnityEngine;
 
 namespace Scrips.Domain.HeroStats.Models
 {
     [Serializable]
-    public abstract class CharacterBaseStat : ICharacterStat
+    public sealed class CharacterBaseStat : ICharacterStatData
     {
-        [SerializeField] private int _startingValue;
-        [SerializeField, NotNull] private string _name;
-        [SerializeField] private Color _color;
-        [SerializeField] private StatLevelUpSettings _levelUpSettings;
-
-        public int GetCurrentValue() => _currentStatValue;
-        public CharacterStatVisualData GetStatVisuals() => new (_name, _color);
+        private readonly CharacterBaseStatSettings _settings;
+        private readonly StatLevelUpSettings _levelUpSettings;
+        public float GetCurrentValue() => _currentStatValue;
+        public CharacterStatVisualData GetStatVisuals() => new (_settings.Name, _settings.Color);
         
-        private int _currentStatValue;
+        private float _currentStatValue;
 
-        protected CharacterBaseStat()
+        public CharacterBaseStat(CharacterBaseStatSettings settings)
         {
-            _currentStatValue = _startingValue;
+            _settings = settings;
+            _levelUpSettings = _settings.LevelUpSettings;
+            _currentStatValue = _settings.StartingValue;
         }
 
         public void LevelUpStat()
         {
-            _currentStatValue = Mathf.CeilToInt(_currentStatValue * _levelUpSettings.StatIncreasePerLevelModifier);
+            _currentStatValue *= _levelUpSettings.StatIncreasePerLevelModifier;
         }
     }
 }

@@ -1,36 +1,35 @@
 using Cysharp.Threading.Tasks;
 using R3;
-using Scrips.Domain.Hero.HeroSettings;
+using Scrips.Domain.Hero.Configs;
 using UnityEngine;
 
 namespace Scrips.Domain.Wallet.Models
 {
     public class HeroWallet : IWalletModel
     {
-        public ReactiveProperty<int> CurrentCoins { get; }
+        public ReactiveProperty<long> CurrentCoins { get; }
 
-        private HeroLevelUpSettings _levelUpSettings;
-
-
+        private readonly HeroLevelUpSettings _levelUpSettings;
+        
         public HeroWallet(int initialCoins, HeroLevelUpSettings levelUpSettings)
         {
-            CurrentCoins = new ReactiveProperty<int>(initialCoins);
+            CurrentCoins = new ReactiveProperty<long>(initialCoins);
             _levelUpSettings = levelUpSettings;
         }
         
-        public UniTask<bool> TrySpendingAmount(int coinsAmount)
+        public bool TrySpendingAmount(long coinsAmount)
         {
             if (coinsAmount > CurrentCoins.Value) 
-                return new UniTask<bool>(false);
+                return false;
             
             CurrentCoins.Value -= coinsAmount;
-            return new UniTask<bool>(true);
+            return true;
         }
 
-        public int CalculateLevelUpPriceForLevel(int level)
+        public long CalculateLevelUpPriceForLevel(int level)
         {
-            var oneLevelUpPrice = Mathf.CeilToInt(_levelUpSettings.RequiredCoinsForLevelUp *
-                             _levelUpSettings.CoinsIncreasePerLevelMultiplier * (level - 1));
+            var oneLevelUpPrice = (long)(_levelUpSettings.RequiredCoinsForLevelUp *
+                             Mathf.Pow(_levelUpSettings.CoinsIncreasePerLevelMultiplier, level - 1));
 
             return oneLevelUpPrice;
         }
