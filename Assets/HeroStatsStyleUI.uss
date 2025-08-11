@@ -1,0 +1,14 @@
+.header {
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    -unity-text-align: upper-center;
+}
+
+.button {
+}
+
+.half_page_label {
+}
