@@ -1,35 +1,35 @@
 using Scrips.Application.UseCases;
-using Scrips.Domain.Hero.Models;
-using Scrips.Domain.Hero.Presenters;
-using Scrips.Presentation.Views;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 using MessagePipe;
-using Scrips.Domain.Hero.Configs;
-using Scrips.Domain.Hero.MessagesDTO;
+using Scrips.Domain.MessagesDTO;
+using Scrips.Domain.Models.Hero;
+using Scrips.Infrastructure.Configs;
+using Scrips.Presentation.Presenters;
+using Scrips.Presentation.Views.HeroView;
 
 namespace Scrips.Infrastructure.Installers
 {
     public class HeroInstaller : LifetimeScope
     {
-        [SerializeField] private HeroView _heroView;
+        [SerializeField] private HeroLayoutViewBase _heroLayoutViewBase;
         [SerializeField] private HeroStartingStatsSettings _heroStartingSettings;
+        [SerializeField] private HeroLevelUpSettings _heroLevelUpSettings;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            var heroModel = new HeroModel(_heroStartingSettings);
+            var heroModel = new HeroModel(_heroStartingSettings, _heroLevelUpSettings);
             
             builder.RegisterInstance<IHeroStatsModel, IHeroUpdatableModel>(heroModel);
 
             var pipeOptions = builder.RegisterMessagePipe();
             builder.RegisterMessageBroker<LevelUpButtonClickedDTO>(pipeOptions);
             
-            
             builder.RegisterEntryPoint<HeroPresenter>();
             builder.RegisterEntryPoint<HeroUpdateUseCase>();
 
-            builder.RegisterComponent<IHeroView>(_heroView);
+            builder.RegisterComponent<IHeroView>(_heroLayoutViewBase);
         }
     }
 }

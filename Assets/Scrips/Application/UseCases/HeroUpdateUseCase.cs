@@ -1,33 +1,25 @@
 using System;
 using MessagePipe;
-using Scrips.Domain.Hero.MessagesDTO;
-using Scrips.Domain.Hero.Models;
-using Scrips.Domain.Wallet.Models;
+using Scrips.Domain.MessagesDTO;
+using Scrips.Domain.Models.Hero;
+using Scrips.Domain.Models.Wallet;
 using VContainer;
 using VContainer.Unity;
 
 namespace Scrips.Application.UseCases
 {
-    public class HeroUpdateUseCase : IStartable, IDisposable
+    public class HeroUpdateUseCase : IInitializable, IDisposable
     {
-        private readonly IHeroUpdatableModel _updatableModelHero;
-        private readonly IWalletModel _walletModel;
-        private readonly ISubscriber<LevelUpButtonClickedDTO> _subscriber;
+        [Inject] private readonly IHeroUpdatableModel _updatableModelHero;
+        [Inject] private readonly IWalletModel _walletModel;
+        [Inject] private readonly ISubscriber<LevelUpButtonClickedDTO> _subscriber;
         private IDisposable _subscription;
         
-        [Inject]
-        public HeroUpdateUseCase(IHeroUpdatableModel updatableModelHero, IWalletModel walletModel, ISubscriber<LevelUpButtonClickedDTO> subscriber)
-        {
-            _updatableModelHero = updatableModelHero;
-            _walletModel = walletModel;
-            _subscriber = subscriber;
-        }
-        
-        public void Start()
+        public void Initialize()
         {
             _subscription = _subscriber.Subscribe( buttonClickedData =>
             {
-                var coinsForNextLevel = _walletModel.CalculateLevelUpPriceForLevel(buttonClickedData.CurrentLevel);
+                var coinsForNextLevel = _updatableModelHero.NextLevelPrice.CurrentValue;
                 var wasPurchaseCompleted = _walletModel.TrySpendingAmount(coinsForNextLevel);
 
                 if (wasPurchaseCompleted)

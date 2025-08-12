@@ -6,7 +6,7 @@ namespace Settings
     public class TextLabels : ScriptableObject
     {
         [SerializeField] private string _currentLevelLabel = "Current level: ";
-        [SerializeField] private string _levelUpButtonText = "Level up!";
+        [SerializeField] private string _levelUpButtonText = "Level up! Next level price: ";
         [SerializeField] private string _currentMoneyText = "Current coins amount: ";
         
         public string CurrentLevelLabel => _currentLevelLabel;
