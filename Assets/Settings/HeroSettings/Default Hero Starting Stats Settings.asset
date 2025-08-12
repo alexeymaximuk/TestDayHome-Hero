@@ -33,3 +33,8 @@ MonoBehaviour:
     _color: {r: 0.33962262, g: 0.19246349, b: 0, a: 1}
     _levelUpSettings: {fileID: 11400000, guid: ad062dcd120d94a4eba606167d5a9593, type: 2}
     _statId: id_armor
+  - _startingValue: 300
+    _name: Stamina
+    _color: {r: 0.5660378, g: 0.5495553, b: 0, a: 1}
+    _levelUpSettings: {fileID: 11400000, guid: ad062dcd120d94a4eba606167d5a9593, type: 2}
+    _statId: id_stamina

@@ -11,8 +11,8 @@ namespace Scrips.Application.UseCases
     public class StatSelectUseCase : IInitializable, IDisposable
     {
         [Inject] private readonly IHeroStatsModel _statsHeroModel;
-        [Inject] private ISubscriber<OnHeroStatClickedDTO> _statClickedSubscriber;
-        [Inject] private IPublisher<OnHeroStatSelectedDTO> _statSelectedPublisher;
+        [Inject] private readonly ISubscriber<OnHeroStatClickedDTO> _statClickedSubscriber;
+        [Inject] private readonly IPublisher<OnHeroStatSelectedDTO> _statSelectedPublisher;
 
         private readonly CompositeDisposable _compositeDisposable = new ();
 

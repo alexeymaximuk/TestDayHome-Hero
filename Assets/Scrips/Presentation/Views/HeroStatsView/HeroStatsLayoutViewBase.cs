@@ -21,12 +21,14 @@ namespace Scrips.Presentation.Views.HeroStatsView
             _statsLabelsRoot = root.Q<ListView>("stat_labels_root");
         }
         
-        public bool TryToPickElement(Vector2 worldPosition, out VisualElement element)
+        public bool TryToPickElement(Vector2 worldPosition, out VisualElement visualElement)
         {
-            //var panelPosition = _uiDocument.rootVisualElement.WorldToLocal(worldPosition);
+            var positionInvertedY = new Vector2(worldPosition.x, Screen.height - worldPosition.y);
+            var panel = _uiDocument.rootVisualElement.panel;
+            var panelMousePosition = RuntimePanelUtils.ScreenToPanel(panel, positionInvertedY);
+            visualElement = panel.Pick(panelMousePosition)?.Q<Label>();
             
-            element = _uiDocument.rootVisualElement.panel.Pick(worldPosition);
-            return element == null;
+            return visualElement != null;
         }
 
         public void UpdateHeroStats(IReadOnlyList<ICharacterStatData> currentStats)

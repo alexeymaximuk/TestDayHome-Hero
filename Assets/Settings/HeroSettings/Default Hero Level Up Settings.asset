@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a225c6196543d08d1739c0affe08aa, type: 3}
   m_Name: Default Hero Level Up Settings
   m_EditorClassIdentifier: 
-  _requiredCoinsForLevelUp: 100
-  _coinsIncreasePerLevelMultiplier: 1.5
+  _requiredCoinsForLevelUp: 200
+  _coinsIncreasePerLevelMultiplier: 1.1

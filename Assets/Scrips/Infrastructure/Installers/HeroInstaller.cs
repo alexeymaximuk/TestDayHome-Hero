@@ -1,9 +1,8 @@
+using System;
 using Scrips.Application.UseCases;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using MessagePipe;
-using Scrips.Domain.MessagesDTO;
 using Scrips.Domain.Models.Hero;
 using Scrips.Infrastructure.Configs;
 using Scrips.Presentation.Presenters;
@@ -22,12 +21,11 @@ namespace Scrips.Infrastructure.Installers
             var heroModel = new HeroModel(_heroStartingSettings, _heroLevelUpSettings);
             
             builder.RegisterInstance<IHeroStatsModel, IHeroUpdatableModel>(heroModel);
-
-            var pipeOptions = builder.RegisterMessagePipe();
-            builder.RegisterMessageBroker<LevelUpButtonClickedDTO>(pipeOptions);
             
             builder.RegisterEntryPoint<HeroPresenter>();
-            builder.RegisterEntryPoint<HeroUpdateUseCase>();
+            
+            builder.Register<HeroUpdateUseCase>(Lifetime.Singleton).As<IInitializable>().As<IDisposable>();
+            builder.Register<StatSelectUseCase>(Lifetime.Singleton).As<IInitializable>().As<IDisposable>();
 
             builder.RegisterComponent<IHeroView>(_heroLayoutViewBase);
         }

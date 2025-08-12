@@ -14,22 +14,12 @@ namespace Scrips.Presentation.Presenters
 {
     public class HeroPresenter : IInitializable, IStartable, IDisposable
     {
-        private readonly IHeroStatsModel _heroStatsModel;
-        private readonly IHeroUpdatableModel _heroUpdatableModel;
-        private readonly IHeroView _view;
-        private readonly IPublisher<LevelUpButtonClickedDTO> _publisher;
+        [Inject] private readonly IHeroStatsModel _heroStatsModel;
+        [Inject] private readonly IHeroUpdatableModel _heroUpdatableModel;
+        [Inject] private readonly IHeroView _view;
+        [Inject] private readonly IPublisher<LevelUpButtonClickedDTO> _publisher;
         
         private CompositeDisposable _compositeDisposable;
-
-        [Inject]
-        public HeroPresenter(IHeroStatsModel heroStatsModel, IHeroUpdatableModel heroUpdatableModel, IHeroView view,
-            IPublisher<LevelUpButtonClickedDTO> publisher)
-        {
-            _heroStatsModel = heroStatsModel;
-            _heroUpdatableModel = heroUpdatableModel;
-            _view = view;
-            _publisher = publisher;
-        }
 
         public void Initialize()
         {
@@ -52,7 +42,7 @@ namespace Scrips.Presentation.Presenters
 
         private void OnLevelUpClicked()
         {
-            _publisher.Publish(new LevelUpButtonClickedDTO(_heroStatsModel.CurrentLevel.CurrentValue));
+            _publisher.Publish(new LevelUpButtonClickedDTO());
         }
 
         private void UpdateHeroLevelUpPrice(long levelUpPrice)

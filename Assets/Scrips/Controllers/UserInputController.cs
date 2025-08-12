@@ -1,6 +1,7 @@
 using System;
 using MessagePipe;
 using Scrips.Domain.MessagesDTO;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
 using VContainer.Unity;

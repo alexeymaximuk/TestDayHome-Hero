@@ -10,7 +10,6 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 using CompositeDisposable = R3.CompositeDisposable;
-using Logger = NUnit.Framework.Internal.Logger;
 
 namespace Scrips.Presentation.Presenters
 {
@@ -25,11 +24,11 @@ namespace Scrips.Presentation.Presenters
 
         public void Initialize()
         {
-            _onUserTapSubscriber.Subscribe(message => OnUserClick(message.Position)).AddTo(_compositeDisposable);
         }
 
         public void Start()
         {
+            _onUserTapSubscriber.Subscribe(message => OnUserClick(message.Position)).AddTo(_compositeDisposable);
             _heroStatsModel.CurrentStats.Subscribe(UpdateHeroStats).AddTo(_compositeDisposable);
         }
         
@@ -43,7 +42,6 @@ namespace Scrips.Presentation.Presenters
             if (_statsView.TryToPickElement(position, out var element))
             {
                 _onStatClickPublisher.Publish(new OnHeroStatClickedDTO(element.name));
-                Debug.Log("object click " + element.name);
             }
         }
         
