@@ -4,5 +4,6 @@ namespace Scrips.Domain.Models.HeroStats
     {
         public float GetCurrentValue();
         public CharacterStatVisualData GetStatVisuals();
+        public string GetStatId { get; }
     }
 }

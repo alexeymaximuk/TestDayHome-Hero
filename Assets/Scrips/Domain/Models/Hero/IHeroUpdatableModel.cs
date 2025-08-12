@@ -6,6 +6,6 @@ namespace Scrips.Domain.Models.Hero
     public interface IHeroUpdatableModel
     {
         public ReactiveProperty<long> NextLevelPrice { get; }
-        public UniTask UpdateLevel();
+        public UniTask UpdateLevel(string statId);
     }
 }

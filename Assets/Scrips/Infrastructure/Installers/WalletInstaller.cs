@@ -9,7 +9,6 @@ namespace Scrips.Infrastructure.Installers
 {
     public class WalletInstaller: LifetimeScope
     {
-        
         [SerializeField] private WalletWidget _walletLayout;
         [SerializeField] private int _initialCoins = 100000;
 

@@ -15,6 +15,7 @@ namespace Scrips.Presentation.Views
         public void SetCharacterData(ICharacterStatData characterData)
         {
             var visuals = characterData.GetStatVisuals();
+            _label.name = characterData.GetStatId;
             _label.text = visuals.StatName + " : " + characterData.GetCurrentValue().ToString("F0");
             _label.style.color = visuals.StatColor;
         }

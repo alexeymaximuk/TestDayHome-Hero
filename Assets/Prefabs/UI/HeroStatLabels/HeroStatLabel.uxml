@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Prefabs/UI/HeroStatLabels/HeroStatLabel.uss?fileID=7433441132597879392&amp;guid=192c24fa907fb46238a071d215b3a77c&amp;type=3#HeroStatLabel" />
-    <ui:VisualElement name="list-entry" picking-mode="Ignore" class="unity-label">
-        <ui:Label text="Label" name="character_stat_default" display-tooltip-when-elided="false" picking-mode="Ignore" class="header" style="-unity-text-align: upper-center; align-items: center; width: 80%; align-self: center;" />
+    <ui:VisualElement name="list-entry" class="unity-label">
+        <ui:Label text="Label" name="character_stat_default" display-tooltip-when-elided="false" class="header" style="-unity-text-align: upper-center; align-items: center; width: 80%; align-self: center;" />
     </ui:VisualElement>
 </ui:UXML>

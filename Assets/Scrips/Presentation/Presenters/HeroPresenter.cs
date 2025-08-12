@@ -12,21 +12,33 @@ using CompositeDisposable = R3.CompositeDisposable;
 
 namespace Scrips.Presentation.Presenters
 {
-    public class HeroPresenter : IStartable, IDisposable
+    public class HeroPresenter : IInitializable, IStartable, IDisposable
     {
-        [Inject] private readonly IHeroStatsModel _heroStatsModel;
-        [Inject] private readonly IHeroUpdatableModel _heroUpdatableModel;
-        [Inject] private readonly IHeroView _view;
-        [Inject] private readonly IPublisher<LevelUpButtonClickedDTO> _publisher;
+        private readonly IHeroStatsModel _heroStatsModel;
+        private readonly IHeroUpdatableModel _heroUpdatableModel;
+        private readonly IHeroView _view;
+        private readonly IPublisher<LevelUpButtonClickedDTO> _publisher;
         
         private CompositeDisposable _compositeDisposable;
 
-        public void Start()
+        [Inject]
+        public HeroPresenter(IHeroStatsModel heroStatsModel, IHeroUpdatableModel heroUpdatableModel, IHeroView view,
+            IPublisher<LevelUpButtonClickedDTO> publisher)
+        {
+            _heroStatsModel = heroStatsModel;
+            _heroUpdatableModel = heroUpdatableModel;
+            _view = view;
+            _publisher = publisher;
+        }
+
+        public void Initialize()
         {
             _compositeDisposable = new CompositeDisposable();
-            
+        }
+
+        public void Start()
+        {
             _heroStatsModel.CurrentLevel.Subscribe(UpdateHeroLevel).AddTo(_compositeDisposable);
-            _heroStatsModel.CurrentStats.Subscribe(UpdateHeroStats).AddTo(_compositeDisposable);
             _heroUpdatableModel.NextLevelPrice.Subscribe(UpdateHeroLevelUpPrice).AddTo(_compositeDisposable);
             
             _view.AddOnButtonClickedAction(OnLevelUpClicked);
@@ -51,11 +63,6 @@ namespace Scrips.Presentation.Presenters
         private void UpdateHeroLevel(int currentLevel)
         {
             _view.UpdateHeroLevel(currentLevel);
-        }
-        
-        private void UpdateHeroStats(IReadOnlyList<ICharacterStatData> characterStats)
-        {
-            _view.UpdateHeroStats(characterStats);
         }
     }
 }

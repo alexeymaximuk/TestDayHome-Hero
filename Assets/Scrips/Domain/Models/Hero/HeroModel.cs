@@ -32,20 +32,24 @@ namespace Scrips.Domain.Models.Hero
                 var newStat = new CharacterBaseStat(statSettings);
                 statsList.Add(newStat);
             }
-
             
             _characterBaseStats = statsList;
             CurrentStats = new ReactiveProperty<IReadOnlyList<ICharacterStatData>>(_characterBaseStats);
             NextLevelPrice = new ReactiveProperty<long>(CalculateLevelUpPriceForLevel(CurrentLevel.CurrentValue));
         }
 
-        public UniTask UpdateLevel()
+        public UniTask UpdateLevel(string statId)
         {
             CurrentLevel.Value += 1;
             
             for (var i = 0; i < _characterBaseStats.Count; i++)
             {
-                _characterBaseStats[i].LevelUpStat();
+                var currentStat = _characterBaseStats[i];
+                if (string.Equals(currentStat.GetStatId, statId))
+                {
+                    currentStat.LevelUpStat();
+                    break;
+                }
             }
 
             CurrentStats.OnNext(_characterBaseStats);
@@ -55,7 +59,7 @@ namespace Scrips.Domain.Models.Hero
         }
         
         
-        public long CalculateLevelUpPriceForLevel(int level)
+        private long CalculateLevelUpPriceForLevel(int level)
         {
             var oneLevelUpPrice = (long)(_levelUpSettings.RequiredCoinsForLevelUp *
                                          Mathf.Pow(_levelUpSettings.CoinsIncreasePerLevelMultiplier, level - 1));
