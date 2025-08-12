@@ -13,3 +13,7 @@ Tech stack:
 
 ### Task: 
 Based on existing arcitecture scheme create a __Model__ with initial stats, __View__ (showing current stats and button "level up"), __Presenter__ (controlling the level-up logic).
+
+### How to use: 
+- Select a stat you want to increase on LevelUp
+- Press LevelUp button to increase Hero level and selected stat
